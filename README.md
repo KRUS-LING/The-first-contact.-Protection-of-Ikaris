@@ -10,7 +10,7 @@ Windows
 
 ### Технологии:
 
-MonoGame
+Godot
 
 ### Язык:
 
