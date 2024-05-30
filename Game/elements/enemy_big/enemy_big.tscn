@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsu4i8pux1koc"]
+
+[ext_resource type="Texture2D" uid="uid://ynu2n3epsijj" path="res://assets/image/ships/enemy/big_enemy.png" id="1_2rye0"]
+[ext_resource type="Script" path="res://elements/enemy_big/enemy_big.gd" id="1_w6hb0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8i04m"]
+radius = 61.0
+height = 160.0
+
+[node name="enemy_big" type="CharacterBody2D"]
+rotation = 3.14159
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_w6hb0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-29.4348, -29.4348)
+scale = Vector2(1.80367, 1.80367)
+texture = ExtResource("1_2rye0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-30, -39)
+shape = SubResource("CapsuleShape2D_8i04m")

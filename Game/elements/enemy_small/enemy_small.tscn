@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://mnst3krx0eh4"]
+
+[ext_resource type="Texture2D" uid="uid://bob8dmwmxat8f" path="res://assets/image/ships/enemy/small_enemy.png" id="1_85pri"]
+[ext_resource type="Script" path="res://elements/enemy_small/enemy_small.gd" id="1_uli4m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bs6ls"]
+radius = 21.0238
+
+[node name="enemy_small" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_uli4m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 4
+rotation = 3.14159
+scale = Vector2(1.34375, 1.34375)
+texture = ExtResource("1_85pri")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 4
+visibility_layer = 3
+position = Vector2(0, -2)
+rotation = 3.14159
+shape = SubResource("CircleShape2D_bs6ls")

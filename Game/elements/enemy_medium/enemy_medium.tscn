@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn8n3i45nrkwp"]
+
+[ext_resource type="Texture2D" uid="uid://c8cwddvxw58ev" path="res://assets/image/ships/enemy/medium_enemy.png" id="1_fddc1"]
+[ext_resource type="Script" path="res://elements/enemy_medium/enemy_medium.gd" id="1_x0a4c"]
+[ext_resource type="PackedScene" uid="uid://ccjflaspp7nh3" path="res://elements/weapon_medium/medium_weapon.tscn" id="3_vhaeh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5l8um"]
+radius = 21.0238
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08bt3"]
+radius = 17.0
+
+[node name="enemy_medium" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_x0a4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(1.5388, 1.5388)
+texture = ExtResource("1_fddc1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5l8um")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(28, -15)
+shape = SubResource("CircleShape2D_08bt3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+light_mask = 4
+visibility_layer = 3
+position = Vector2(-28, -15)
+shape = SubResource("CircleShape2D_08bt3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="medium_weapon" parent="." instance=ExtResource("3_vhaeh")]
+position = Vector2(0, 37)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

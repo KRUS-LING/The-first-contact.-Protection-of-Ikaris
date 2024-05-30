@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcbttspmck4r6"]
+
+[ext_resource type="Script" path="res://game/sceneSpawner.gd" id="1_5pjfg"]
+[ext_resource type="Texture2D" uid="uid://csots33j1r4st" path="res://assets/image/background/game.png" id="1_s6vls"]
+[ext_resource type="PackedScene" uid="uid://dhyngscmg4d62" path="res://elements/space_ship/space_ship.tscn" id="2_pjwrt"]
+[ext_resource type="PackedScene" uid="uid://ddh3i7t8po3v0" path="res://elements/wall/wall.tscn" id="3_p3khd"]
+[ext_resource type="PackedScene" uid="uid://dn8n3i45nrkwp" path="res://elements/enemy_medium/enemy_medium.tscn" id="5_i4dhq"]
+[ext_resource type="PackedScene" uid="uid://mnst3krx0eh4" path="res://elements/enemy_small/enemy_small.tscn" id="6_ek7wb"]
+[ext_resource type="PackedScene" uid="uid://5lyge87vlojr" path="res://elements/rocket/rocket.tscn" id="7_8terj"]
+[ext_resource type="PackedScene" uid="uid://bsu4i8pux1koc" path="res://elements/enemy_big/enemy_big.tscn" id="8_3xyqg"]
+[ext_resource type="Texture2D" uid="uid://6lyuj0nlaff7" path="res://assets/image/ships/very_big.png" id="9_dpbao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra4kt"]
+atlas = ExtResource("9_dpbao")
+region = Rect2(0, 0, 128, 258)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_5pjfg")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(840, 525)
+texture = ExtResource("1_s6vls")
+region_enabled = true
+region_rect = Rect2(146, 642, 1680, 1050)
+
+[node name="space_ship" parent="." instance=ExtResource("2_pjwrt")]
+position = Vector2(875, 904)
+
+[node name="wall" parent="." instance=ExtResource("3_p3khd")]
+
+[node name="wall2" parent="." instance=ExtResource("3_p3khd")]
+position = Vector2(1680, 0)
+
+[node name="Timer_medium" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer_small" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Timer_big" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="enemy_medium" parent="." instance=ExtResource("5_i4dhq")]
+position = Vector2(589, 197)
+
+[node name="enemy_small" parent="." instance=ExtResource("6_ek7wb")]
+position = Vector2(1075, 164)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("8_3xyqg")]
+position = Vector2(802, 180)
+rotation = -3.14159
+
+[node name="Timer" type="Label" parent="."]
+offset_left = 28.0
+offset_top = 975.0
+offset_right = 131.0
+offset_bottom = 1030.0
+theme_override_font_sizes/font_size = 40
+text = "00:00"
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 60)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1594.0
+offset_top = 978.0
+offset_right = 1644.0
+offset_bottom = 1038.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ra4kt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="rocket" parent="." instance=ExtResource("7_8terj")]
+position = Vector2(578, 295)
+
+[node name="HP" type="Label" parent="."]
+offset_left = 1561.0
+offset_top = 979.0
+offset_right = 1601.0
+offset_bottom = 1034.0
+theme_override_font_sizes/font_size = 40
+text = "3"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Game_over" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -462.5
+offset_top = -139.0
+offset_right = 438.5
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 150
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="Timer_medium" to="." method="_on_timer_medium_timeout"]
+[connection signal="timeout" from="Timer_small" to="." method="_on_timer_small_timeout"]
+[connection signal="timeout" from="Timer_big" to="." method="_on_timer_big_timeout"]
